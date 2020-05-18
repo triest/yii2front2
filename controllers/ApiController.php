@@ -40,4 +40,34 @@
             return $array;
         }
 
+        public function actionDelete($id)
+        {
+            $request = Yii::$app->request;
+            if (!$request->isDelete) {
+                Yii::$app->response->statusCode = 405;
+            }
+
+            if ($this->findModel($id)->delete()) {
+                Yii::$app->response->statusCode = 200;
+            } else {
+                Yii::$app->response->statusCode = 404;
+            }
+
+        }
+
+        private function findModel($id)
+        {
+            if (($model = User::findOne($id)) !== null) {
+                return $model;
+            }
+
+            return false;
+        }
+
+        public function actionAddRandUser()
+        {
+
+        }
+
+
     }

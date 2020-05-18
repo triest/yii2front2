@@ -16,6 +16,7 @@
     <div class="body-content">
         <div id="app6">
             <div class="row">
+                <button class="btn btn-primary" @click="addRandUser()">Добавить случайного пользователя</button>
                 <table class="table">
                     <thead>
                     <tr>
