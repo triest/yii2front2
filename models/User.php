@@ -1,104 +1,80 @@
 <?php
 
-namespace app\models;
+    namespace app\models;
 
-class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
-{
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
-    public $accessToken;
-
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
-
+    use Yii;
+    use app\models\Skill;
 
     /**
-     * {@inheritdoc}
+     * This is the model class for table "users".
+     *
+     * @property int $id
+     * @property string|null $name
+     * @property int|null $city_id
+     *
+     * @property UserSkills[] $userSkills
+     * @property City $city
      */
-    public static function findIdentity($id)
+    class User extends \yii\db\ActiveRecord
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
+        /**
+         * {@inheritdoc}
+         */
+        public static function tableName()
+        {
+            return 'users';
         }
 
-        return null;
-    }
-
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
+        /**
+         * {@inheritdoc}
+         */
+        public function rules()
+        {
+            return [
+                    [['city_id'], 'integer'],
+                    [['name'], 'string', 'max' => 255],
+                    [
+                            ['city_id'],
+                            'exist',
+                            'skipOnError' => true,
+                            'targetClass' => City::className(),
+                            'targetAttribute' => ['city_id' => 'id']
+                    ],
+            ];
         }
 
-        return null;
-    }
+        /**
+         * {@inheritdoc}
+         */
+        public function attributeLabels()
+        {
+            return [
+                    'id' => 'ID',
+                    'name' => 'Name',
+                    'city_id' => 'City ID',
+            ];
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+        /**
+         * Gets query for [[UserSkills]].
+         *
+         * @return \yii\db\ActiveQuery
+         */
+        public function getUserSkills()
+        {
+            //return $this->hasMany(UserSkills::className(), ['user_id' => 'id']);
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAuthKey()
-    {
-        return $this->authKey;
-    }
+            return $this->hasMany(Skill::className(), ['id' => 'skill_id'])
+                    ->viaTable('User_skills', ['user_id' => 'id']);
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->authKey === $authKey;
+        /**
+         * Gets query for [[City]].
+         *
+         * @return \yii\db\ActiveQuery
+         */
+        public function getCity()
+        {
+            return $this->hasOne(City::className(), ['id' => 'city_id']);
+        }
     }
-
-    /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
-     */
-    public function validatePassword($password)
-    {
-        return $this->password === $password;
-    }
-}
