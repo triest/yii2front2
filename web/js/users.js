@@ -44,7 +44,6 @@ new Vue({
                 )
                 .catch(
                     // error=>console.log(error)
-                    alert("Ошибка")
                 )
         }
     },

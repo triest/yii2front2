@@ -7,9 +7,13 @@
      */
     namespace app\controllers;
 
+    use app\models\City;
+    use app\models\Skill;
     use app\models\User;
+    use Faker\Factory;
     use phpDocumentor\Reflection\Types\Array_;
     use Yii;
+    use yii\db\Expression;
     use yii\filters\AccessControl;
     use yii\web\Controller;
     use yii\web\Response;
@@ -23,12 +27,12 @@
 
         public function actionIndex()
         {
-            $users = User::find()->all();
+            $users = User::find()->orderBy('id', 'desc')->all();
             $array = array();
 
 
             foreach ($users as $user) {
-                $skills = $user->getUserSkills()->all();
+                $skills = $user->getSkills()->all();
                 $city = $user->getCity()->one();
                 $item = array('user' => $user, 'skills' => $skills, 'city' => $city);
                 array_push($array, $item);
@@ -66,7 +70,26 @@
 
         public function actionAddRandUser()
         {
+            $faker = Factory::create();
 
+            $user = new User();
+            $user->name = $faker->name;
+            $query = City::find()
+                    ->orderBy(new Expression('rand()'))
+                    ->limit(1)
+                    ->one();
+            $user->city_id = $query->id;
+            $user->save();
+
+
+            $query = Skill::find()
+                    ->orderBy(new Expression('rand()'))
+                    ->limit(random_int(1, 6))
+                    ->all();
+
+            $user->saveSkill($query);
+
+            Yii::$app->response->statusCode = 201;
         }
 
 

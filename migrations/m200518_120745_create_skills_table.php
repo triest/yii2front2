@@ -14,7 +14,7 @@ class m200518_120745_create_skills_table extends Migration
     {
         $this->createTable('Skills', [
                 'id' => $this->primaryKey(),
-                'title'=>$this->string()
+                'name'=>$this->string()
         ]);
     }
 

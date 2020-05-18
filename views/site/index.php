@@ -31,7 +31,7 @@
                         <td>{{user.city.name}}</td>
                         <td>
                             <div v-for="skill in user.skills">
-                                {{skill.title}}
+                                {{skill.name}}
                             </div>
                         </td>
                         <td>

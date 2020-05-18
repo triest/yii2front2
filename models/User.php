@@ -60,7 +60,7 @@
          *
          * @return \yii\db\ActiveQuery
          */
-        public function getUserSkills()
+        public function getSkills()
         {
             //return $this->hasMany(UserSkills::className(), ['user_id' => 'id']);
 
@@ -76,5 +76,13 @@
         public function getCity()
         {
             return $this->hasOne(City::className(), ['id' => 'city_id']);
+        }
+
+        public function saveSkill($skills)
+        {
+            foreach ($skills as $skill) {
+                $this->link('skills', $skill);
+            }
+
         }
     }

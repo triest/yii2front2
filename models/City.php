@@ -27,6 +27,8 @@ class City extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'string', 'max' => 255],
+                ['name', 'unique', 'targetClass' => '\app\models\City',
+                        'message' => 'This city has already been taken.'],
         ];
     }
 
