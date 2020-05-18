@@ -10,7 +10,6 @@ new Vue({
                 .then(
                     response => {
                         //   console.log(response);
-                        console.log(response.data)
                         this.users = response.data;
                     }
                 )
@@ -22,15 +21,13 @@ new Vue({
             var confirm_var = confirm("Удалить пользователя?");
             if (confirm_var) {
                 axios
-                    .get('api/delete', {user_id: user_id})
+                    .get('api/delete', {params: {id: user_id}})
                     .then(
                         response => {
                             this.getUsers();
                         }
                     )
                     .catch(
-                        // error=>console.log(error)
-                        alert("Ошибка")
                     )
             }
         },
@@ -43,7 +40,6 @@ new Vue({
                     }
                 )
                 .catch(
-                    // error=>console.log(error)
                 )
         }
     },

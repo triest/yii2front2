@@ -35,7 +35,7 @@
                             </div>
                         </td>
                         <td>
-                            <button class="btn btn-danger" @click="deleteUser(user.id)">Удалить</button>
+                            <button class="btn btn-danger" @click="deleteUser(user.user.id)">Удалить</button>
                         </td>
                     </tr>
                     </tbody>

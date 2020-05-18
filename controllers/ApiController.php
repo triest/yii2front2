@@ -47,11 +47,10 @@
         public function actionDelete($id)
         {
             $request = Yii::$app->request;
-            if (!$request->isDelete) {
-                Yii::$app->response->statusCode = 405;
-            }
-
-            if ($this->findModel($id)->delete()) {
+            $id = intval($request->get('id'));
+            $model = $this->findModel($id);
+            if ($model != false) {
+                $model->delete();
                 Yii::$app->response->statusCode = 200;
             } else {
                 Yii::$app->response->statusCode = 404;
@@ -61,7 +60,7 @@
 
         private function findModel($id)
         {
-            if (($model = User::findOne($id)) !== null) {
+            if (($model = User::findOne($id)) != null) {
                 return $model;
             }
 
