@@ -33,7 +33,7 @@
             $city->name = "Москва";
             $city->save();
             $city = new City();
-            $city->name = "Владивастоков";
+            $city->name = "Владивосто́к";
             $city->save();
             $city = new City();
             $city->name = "Калининград";
@@ -66,7 +66,7 @@
             $skils->save();
 
             $skils = new Skill();
-            $skils->name = "Mysql";
+            $skils->name = "MySQL";
             $skils->save();
         }
 
