@@ -1,7 +1,6 @@
 let dataTable;
 let myData;
 $(document).ready(function () {
-    console.log("reade");
     dataTable = $("#example");
     getData();
 });
@@ -9,7 +8,7 @@ $(document).ready(function () {
 function getData() {
     $.ajax({
         type: "GET",
-        url: '/api',
+        url: 'api',
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         success: function (data) {
@@ -18,6 +17,30 @@ function getData() {
                 "data": myData,
                 "bProcessing": true,
                 "destroy": true,
+                "language": {
+                    "sProcessing": "Загрузка...",
+                    "sLengthMenu": "Показывать _MENU_ пользователей на странице",
+                    "sZeroRecords": "No se encontraron resultados",
+                    "sEmptyTable": "Нет данных",
+                    "sInfo": "Пользователи с  _START_ по _END_, всего _TOTAL_ ",
+                    "sInfoEmpty": "Страница 1 из 1, всего _TOTAL_ записей",
+                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Поиск:",
+                    "sUrl": "",
+                    "sInfoThousands": ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst": "Первая страница",
+                        "sLast": "Последняя страница",
+                        "sNext": "Следующая страница",
+                        "sPrevious": "Предыдущая страница"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                },
                 "columns": [
                     {"data": "user.name"},
                     {"data": "city.name"},
@@ -80,6 +103,7 @@ function deleteUser(user_id) {
                 getData()
             },
             fail: function (data) {
+                Alert("Ошибка при удалении!");
                 getData()
             }
 
