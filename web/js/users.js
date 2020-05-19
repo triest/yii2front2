@@ -1,49 +1,22 @@
-new Vue({
-    el: '#app6',
-    data: {
-        users: [],
-    },
-    methods: {
-        getUsers() {
-            axios
-                .get('api')
-                .then(
-                    response => {
-                        //   console.log(response);
-                        this.users = response.data;
-                    }
-                )
-                .catch(
-                    // error=>console.log(error)
-                )
-        },
-        deleteUser(user_id) {
-            var confirm_var = confirm("Удалить пользователя?");
-            if (confirm_var) {
-                axios
-                    .get('api/delete', {params: {id: user_id}})
-                    .then(
-                        response => {
-                            this.getUsers();
-                        }
-                    )
-                    .catch(
-                    )
-            }
-        },
-        addRandUser() {
-            axios
-                .get('api/add-rand-user')
-                .then(
-                    response => {
-                        this.getUsers();
-                    }
-                )
-                .catch(
-                )
+$(document).ready(function () {
+    console.log("reade");
+    $.ajax({
+        type: "GET",
+        url: '/api',
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            var myData = data;
+            console.log(myData)
+            $('#example').DataTable({
+                "data": myData,
+                "columns": [
+                    { "data": "user.name"},
+                    { "data": "city.name"},
+
+                ]
+            });
+
         }
-    },
-    beforeMount() {
-        this.getUsers()
-    }
-})
+    });
+});
