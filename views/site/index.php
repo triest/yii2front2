@@ -11,15 +11,16 @@
 } catch (\yii\base\InvalidConfigException $e) {
 } ?>
 <div class="site-index">
+    <button onclick="addNewUser()"> Add new user</button>
     <div class="body-content">
-            <table id="example" class="display" style="width:100%">
-                <thead>
-                <tr>
-                    <th>Имя</th>
-                    <th>Место жительства</th>
-                    <th>Навыки</th>
-                </tr>
-                </thead>
-            </table>
+        <table id="example" class="display" style="width:100%">
+            <thead>
+            <tr>
+                <th>Имя</th>
+                <th>Место жительства</th>
+                <th>Навыки</th>
+            </tr>
+            </thead>
+        </table>
     </div>
 </div>
