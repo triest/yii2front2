@@ -2,7 +2,7 @@
 
     /* @var $this yii\web\View */
 
-    $this->title = 'My Yii Application';
+    $this->title = 'Users and skills';
 ?>
 <?php try {
     $this->registerJsFile(Yii::$app->request->baseUrl . '/js/users.js',

@@ -70,5 +70,50 @@
             $skils->save();
         }
 
+        public static function seed()
+        {
+            $faker = \Faker\Factory::create();
+
+            $city = new City();
+            $city->name = "Москва";
+            $city->save();
+            $city = new City();
+            $city->name = "Владивосто́к";
+            $city->save();
+            $city = new City();
+            $city->name = "Калининград";
+            $city->save();
+
+            $skils = new Skill();
+            $skils->name = "PHP";
+            $skils->save();
+            $skils = new Skill();
+            $skils->name = "NodeJS";
+            $skils->save();
+            $skils = new Skill();
+            $skils->name = "Laravel";
+            $skils->save();
+
+            $skils = new Skill();
+            $skils->name = "Vue";
+            $skils->save();
+
+            $skils = new Skill();
+            $skils->name = "Yii2";
+            $skils->save();
+
+            $skils = new Skill();
+            $skils->name = "C#";
+            $skils->save();
+
+            $skils = new Skill();
+            $skils->name = "C++";
+            $skils->save();
+
+            $skils = new Skill();
+            $skils->name = "MySQL";
+            $skils->save();
+        }
+
 
     }

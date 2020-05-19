@@ -21,7 +21,7 @@ class m200518_121244_create_user_skills_table extends Migration
         // creates index for column `user_id`
         $this->createIndex(
                 'idx_user_skills_user_id',
-                'user_skills',
+                'User_skills',
                 'user_id'
         );
 
@@ -29,7 +29,7 @@ class m200518_121244_create_user_skills_table extends Migration
         // add foreign key for table `user`
         $this->addForeignKey(
                 'user_skills_user_id',
-                'user_skills',
+                'User_skills',
                 'user_id',
                 'Users',
                 'id',
@@ -47,7 +47,7 @@ class m200518_121244_create_user_skills_table extends Migration
         // add foreign key for table `user`
         $this->addForeignKey(
                 'user_skills_skill_id',
-                'user_skills',
+                'User_skills',
                 'skill_id',
                 'Skills',
                 'id',

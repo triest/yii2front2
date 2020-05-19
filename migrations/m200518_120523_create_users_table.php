@@ -15,7 +15,7 @@ class m200518_120523_create_users_table extends Migration
         $this->createTable('Users', [
                 'id' => $this->primaryKey(),
                 'name'=>$this->string(),
-                'city_id'=>$this->integer()->nu,
+                'city_id'=>$this->integer()->null(),
         ]);
     }
 
