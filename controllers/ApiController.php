@@ -47,7 +47,7 @@
         public function actionDelete($id)
         {
             $request = Yii::$app->request;
-            $id = intval($request->get('id'));
+          //  $id = intval($request->get('id'));
             $model = $this->findModel($id);
             if ($model != false) {
                 $model->delete();

@@ -20,11 +20,11 @@ function getData() {
                 "language": {
                     "sProcessing": "Загрузка...",
                     "sLengthMenu": "Показывать _MENU_ пользователей на странице",
-                    "sZeroRecords": "No se encontraron resultados",
+                    "sZeroRecords": "Нет данных",
                     "sEmptyTable": "Нет данных",
                     "sInfo": "Пользователи с  _START_ по _END_, всего _TOTAL_ ",
                     "sInfoEmpty": "Страница 1 из 1, всего _TOTAL_ записей",
-                    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                    "sInfoFiltered": "(отфильтровано из _MAX_ пользователей)",
                     "sInfoPostFix": "",
                     "sSearch": "Поиск:",
                     "sUrl": "",
@@ -46,7 +46,7 @@ function getData() {
                     {"data": "city.name"},
                     {
                         "mData": null,
-                        "bSortable": false,
+                        "bSortable": true,
                         "mRender": function (data, type, full) {
                             let string = "";
                             let arraySkills = data.skills;
